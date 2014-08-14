@@ -6,6 +6,10 @@ apply plugin: 'idea'
 eclipse.classpath.downloadSources = true
 eclipse.classpath.downloadJavadoc = true
 
+task wrapper(type: Wrapper) {
+    gradleVersion = '1.9'
+}
+
 repositories {
     maven {
         url 'http://deux.gemjars.org'
