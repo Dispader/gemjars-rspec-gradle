@@ -1,6 +1,7 @@
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'idea'
+apply from: 'gradle/plugins/integration-test.gradle' // integration tests
 
 // IDE integration
 eclipse.classpath.downloadSources = true
@@ -11,9 +12,7 @@ task wrapper(type: Wrapper) {
 }
 
 repositories {
-    maven {
-        url 'http://deux.gemjars.org'
-    }
+    maven { url 'http://deux.gemjars.org' }
     mavenCentral()
 }
 
@@ -22,10 +21,8 @@ configurations {
 }
 
 sourceSets {
-    test {
-        resources {
+    test.resources {
             srcDir 'src/test/ruby'
-        }
     }
 }
 
@@ -40,4 +37,4 @@ task(rspec, type: JavaExec) {
     args 'classpath:bin/rspec', 'src/test/ruby'
 }
 
-tasks.build.dependsOn << 'rspec'
+tasks.test.dependsOn << 'rspec'
